@@ -1,15 +1,15 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 
-function ProductionForm({addProduction}) {
+function ProductionForm({ addProduction }) {
   const [formData, setFormData] = useState({
-    title:'',
-    genre:'',
-    budget:'',
-    image:'',
-    director:'',
-    description:''
+    title: '',
+    genre: '',
+    budget: '',
+    image: '',
+    director: '',
+    description: ''
   })
   const [errors, setErrors] = useState([])
   const history = useHistory()
@@ -20,59 +20,59 @@ function ProductionForm({addProduction}) {
     setFormData({ ...formData, [name]: value })
   }
 
-  function onSubmit(e){
+  function onSubmit(e) {
     e.preventDefault()
     // // POST '/productions'
-    // fetch('/productions',{
-    //   method: 'POST',
-    //   headers: {'Content-Type':'application/json'},
-    //   body: JSON.stringify({...formData, ongoing:true})
-    // })
-    // .then(res => {
-    //   if(res.ok){
-    //     res.json().then(console.log)
-    //   } else {
-    //     res.json().then(data => {
-    //       console.log('Error: ', Object.entries(data.errors).map(e => `${e[0]}: ${e[1]}`))
-    //       //data -> {errors:{}} -> Object.entries(data.errors) -> [[title,['can't be blank']]]
-    //       // .map(e => e[0] : e[1]) -> ['title: can't be blank']
-    //       setErrors(Object.entries(data.errors).map(e => `${e[0]}: ${e[1]}`))
-    //     })
-    //   }
-    // })
+    fetch('/productions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData, ongoing: true })
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(console.log)
+        } else {
+          res.json().then(data => {
+            console.log('Error: ', Object.entries(data.errors).map(e => `${e[0]}: ${e[1]}`))
+            //data -> {errors:{}} -> Object.entries(data.errors) -> [[title,['can't be blank']]]
+            // .map(e => e[0] : e[1]) -> ['title: can't be blank']
+            setErrors(Object.entries(data.errors).map(e => `${e[0]}: ${e[1]}`))
+          })
+        }
+      })
   }
-  
-    return (
-      <div className='App'>
-        {errors?errors.map(e => <div>{e}</div>):null}
+
+  return (
+    <div className='App'>
+      {errors ? errors.map(e => <div>{e}</div>) : null}
       <Form onSubmit={onSubmit}>
         <label>Title </label>
         <input type='text' name='title' value={formData.title} onChange={handleChange} />
 
         <label> Genre</label>
         <input type='text' name='genre' value={formData.genre} onChange={handleChange} />
-      
+
         <label>Budget</label>
         <input type='number' name='budget' value={formData.budget} onChange={handleChange} />
-      
+
         <label>Image</label>
         <input type='text' name='image' value={formData.image} onChange={handleChange} />
-      
+
         <label>Director</label>
         <input type='text' name='director' value={formData.director} onChange={handleChange} />
-      
+
         <label>Description</label>
         <textarea type='text' rows='4' cols='50' name='description' value={formData.description} onChange={handleChange} />
-      
+
         <input type='submit' value='Add Production' />
       </Form>
-      </div>
-    )
-  }
-  
-  export default ProductionForm
+    </div>
+  )
+}
 
-  const Form = styled.form`
+export default ProductionForm
+
+const Form = styled.form`
     display:flex;
     flex-direction:column;
     width: 400px;
