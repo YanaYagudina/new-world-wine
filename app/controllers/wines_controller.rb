@@ -1,4 +1,6 @@
 class WinesController < ApplicationController
+rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+ 
     def index
         render json Wine.all, status: :ok
     end
@@ -10,7 +12,11 @@ class WinesController < ApplicationController
 
     def create
         @wine = Wine.create!(wine_params)
-        render json: @wine, status: :created
+        if wine.valid?
+            render json: @wine, status: :created
+        else
+            render json: {errors: production.erors.full_messages}, status: :unprocessable_entity
+        # => or without @?
     end
 
     def update
@@ -28,5 +34,9 @@ class WinesController < ApplicationController
     def wine_params
         params.permit ( :name, :year, :price, :product_information, :brand, :country, :region, :appellation, :wine_type, :varietal, :style, :abv, :taste, :body)
     end 
+
+    def render_unprocessable_entity(invalid)
+        render json: {errors: invalid.record.errors}, status: : unprocessable_entity
+    end
     
 end
