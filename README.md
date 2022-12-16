@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Next, run the Rails server in one terminal:
+
+rails s
+
+Open another terminal and run the React server:
+
+npm start --prefix client
