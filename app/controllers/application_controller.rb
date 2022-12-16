@@ -7,7 +7,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   private
 
   def render_unprocessable_entity(invalid)
-    render json: {erors: invalid.record.errors}, atatus: :unprocessable_entity
+    render json: {errors: invalid.record.errors}, status: :unprocessable_entity
   end
 
   def render_not_found(error)
