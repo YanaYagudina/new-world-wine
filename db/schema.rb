@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_16_023005) do
   create_table "comments", force: :cascade do |t|
+    t.string "comment"
     t.integer "rating"
     t.string "user_id"
     t.string "wine_id"

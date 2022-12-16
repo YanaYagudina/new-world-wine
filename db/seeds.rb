@@ -30,7 +30,7 @@ Wine.create(name: "Altaland Malbec Mendoza", year: 2020, price: 19.99, product_i
 Wine.create(name: "Floorshow Red", year: 2018, price: 33.99, product_information: "", brand: " Floorshow", country: "USA", region: "California", appelation: "", wine_type: "Red Wine", varietal: "Zinfandel", style: "Concentrated", abv: 15.2, taste: "Raspberry, Boysenberry, Spice", body: "Full-bodied")
 Wine.create(name: "Borrasca Prosecco Rose", year: 2018, price: 16.99, product_information: "", brand: " Borrasca", country: "Italy", region: " Veneto", appelation: "", wine_type: "Champagne & Sparkling Wine", varietal: "Prosecco, Rose", style: "Crisp", abv: 11, taste: "Floral, Tropical, Strawberry", body: "Light-bodied")
 
-puts "Creating customers..."
+puts "Creating users..."
 
 20.times do
 User.create(
