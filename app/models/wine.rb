@@ -1,8 +1,8 @@
 class Wine < ApplicationRecord
-    has_many :contents
-    has_many :customers, through: :contents
+    has_many :comments
+    has_many :users, through: :comments
     has_many :orders
-    has_many :customers, through: :orders
+    has_many :users, through: :orders
 
     # validates :name, present: true
 end
