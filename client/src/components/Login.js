@@ -37,7 +37,7 @@ function Login(updateUser) {
                   updateUser(user)
                      history.push(`users/${user.id}`)
                  })
-             }else {
+             } else {
                  res.json().then(json => setErrors(json.errors))
              }
         })
