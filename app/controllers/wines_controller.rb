@@ -41,7 +41,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     end
 
     def render_not_found
-        render lson: {errors: "Wine Not Found"}, ststus: :not_found
+        render lson: {errors: "Wine Not Found"}, status: :not_found
     end
 
     

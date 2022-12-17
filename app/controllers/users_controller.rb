@@ -3,8 +3,11 @@ class UsersController < ApplicationController
         render json User.all, status: :ok
     end
 
+    skip_before_action :authorized_user, only: [:create]
+
     def show
-        user = User.find(params[:id])
+        user = User.find(session[:user_id])
+
         render json: user, status: :ok    
     end
 
