@@ -2,8 +2,8 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-function ProductionDetail({ deleteProduction }) {
-  const [production, setProduction] = useState({ crew_members: [], performers_and_roles: [] })
+function WineDetail({ deleteWine }) {
+  // const [wine, setWine] = useState({ crew_members: [], performers_and_roles: [] })
   const [errors, setErrors] = useState()
 
   const params = useParams()
@@ -12,12 +12,12 @@ function ProductionDetail({ deleteProduction }) {
   console.log(params)
 
   useEffect(() => {
-    //GET to '/productions/:id'
-    fetch(`/productions/1000`)
+    //GET to '/wines/:id'
+    fetch(`/wines/1000`)
       .then(res => {
         if (res.ok) {
           console.log(res)
-          res.json().then(setProduction)
+          res.json().then(setWine)
         } else {
           res.json().then(data => {
             console.log(data)
@@ -28,14 +28,14 @@ function ProductionDetail({ deleteProduction }) {
   }, [])
 
   function handleDelete() {
-    //DELETE to `/productions/${params.id}`
+    //DELETE to `/wines/${params.id}`
 
   }
   if(errors) return <div>{errors}</div>
 
-  const { id, name, budget, genre, image, description, director } = production
+  const { id, name, year, wine_type, abv, varietal, product_information, taste, body, style } = production
   //Place holder data, will be replaced in the assosiations lecture. 
-  const crew_members = ['Lily-Mai Harding', 'Cathy Luna', 'Tiernan Daugherty', 'Giselle Nava', 'Alister Wallis', 'Aishah Rowland', 'Keiren Bernal', 'Aqsa Parrish', 'Daanyal Laing', 'Hollie Haas']
+  // const crew_members = ['Lily-Mai Harding', 'Cathy Luna', 'Tiernan Daugherty', 'Giselle Nava', 'Alister Wallis', 'Aishah Rowland', 'Keiren Bernal', 'Aqsa Parrish', 'Daanyal Laing', 'Hollie Haas']
   return (
     <CardDetail>
       <h1>{title}</h1>
@@ -58,20 +58,20 @@ function ProductionDetail({ deleteProduction }) {
           <h3>Style:</h3>
           <p>{style}</p>
           <h2>Crew Memebers</h2>
-          <ul>
+          {/* <ul>
             {crew_members.map(crew => <li>{crew}</li>)}
-          </ul>
+          </ul> */}
         </div>
-        <img src={image} />
+        {/* <img src={image} /> */}
       </div>
-      <button><Link to={`/productions/${id}/edit`}>Edit Production</Link></button>
-      <button onClick={handleDelete}>Delete Production</button>
-      <button >Buy Ticket</button>
+      <button><Link to={`/wines/${id}/edit`}>Edit Wine</Link></button>
+      <button onClick={handleDelete}>Delete Wine</button>
+      <button >Buy Wine</button>
     </CardDetail>
   )
 }
 
-export default ProductionDetail
+export default WineDetail
 const CardDetail = styled.li`
     display:flex;
     flex-direction:column;
