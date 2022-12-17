@@ -15,6 +15,7 @@ class CreateWines < ActiveRecord::Migration[7.0]
       t.integer :abv
       t.string :taste
       t.string :body
+      t.string :image
 
       t.timestamps
     end

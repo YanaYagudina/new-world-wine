@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_023005) do
     t.integer "abv"
     t.string "taste"
     t.string "body"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

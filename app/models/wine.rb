@@ -4,10 +4,11 @@ class Wine < ApplicationRecord
     has_many :orders
     has_many :users, through: :orders
 
-    validates_presence_of: :name, :price, :brand, :product_information, :country, :wine_type, :abv
+    # validates_presence_of :name, :price, :brand, :product_information, :country, :wine_type, :abv
     validates :name, uniqueness: true, length: {maximum: 300}
     validates :price, numericality: {greater_then: 0}
-    validates :abv, numericality: {only_integer, greater_then: 5}
+    # validates :abv, numericality: {only_integer, greater_then: 5}
+    validates :abv, numericality: {greater_then: 5}
     validates :brand, length: {maximum: 150}
     validates :country, length: {maximum: 50}
     validates :wine_type, length: {maximum: 30}
