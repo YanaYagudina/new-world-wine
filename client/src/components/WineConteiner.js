@@ -1,20 +1,20 @@
 import styled from 'styled-components'
-import ProductionCard from './ProductionCard'
+import WineCard from './WineCard'
 
 
-function ProductionContainer({productions}) {
+function WineContainer({wines}) {
 
     return (
      <div>
          <Title><span>F</span>latIron Theater <span>C</span>ompany</Title>
          <CardContainer>
-             {productions.map(production => <ProductionCard  key={production.id} production={production}  />)}
+             {wines.map(wine => <WineCard key={wine.id} wine={wine} />)}
          </CardContainer>
      </div>
     )
   }
   
-export default ProductionContainer
+export default WineContainer
 
 const Title = styled.h1`
     text-transform: uppercase;
