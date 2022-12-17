@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import ProductionContainer from './ProductionContainer'
+import WineContainer from './WineContainer'
 
-function Home({productions}){
+function Home({wines}){
     return(
     <div>
         <Image /> 
-        <ProductionContainer productions={productions} />
+        <WineContainer wines={wines} />
     </div>
     )
 }
