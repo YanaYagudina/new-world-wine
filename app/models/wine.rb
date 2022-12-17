@@ -3,7 +3,7 @@ class Wine < ApplicationRecord
     has_many :users, through: :comments
     has_many :orders
     has_many :users, through: :orders
-
+    # => migration doesn't work with this line:
     # validates_presence_of :name, :price, :brand, :product_information, :country, :wine_type, :abv
     validates :name, uniqueness: true, length: {maximum: 300}
     validates :price, numericality: {greater_then: 0}

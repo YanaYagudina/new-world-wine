@@ -16,7 +16,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
         if wine.valid?
             render json: @wine, status: :created
         else
-            render json: {errors: production.erors.full_messages}, status: :unprocessable_entity
+            render json: {errors: production.errors.full_messages}, status: :unprocessable_entity
         # => or without @?
     end
 
