@@ -2,14 +2,14 @@ import { Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
 import Home from './components/Home'
-import ProductionForm from './components/ProductionForm'
-import EditProductionForm from './components/EditProductionForm'
+import WineForm from './components/WineForm'
+import EditWineForm from './components/EditWineForm'
 import Navigation from './components/Navigation'
-import ProductionDetail from './components/ProductionDetail'
+import WineDetail from './components/WineDetail'
 import NotFound from './components/NotFound'
 
 function App() {
-  const [productions, setProductions] = useState([])
+  const [wines, setWines] = useState([])
   const [errors, setErrors] = useState(false)
   const [currentUser, setCurrentUser] = useState(false)
 
@@ -20,36 +20,36 @@ function App() {
         res.json()
           .then(user => {
             setCurrentUser(user)
-            fetchProductions()
+            fetchWines()
           })
       }
     }, [])
-    // GET '/productions'
+    // GET '/wines'
 
-    const fetchProductions = () => {
-      fetch('/productions')
+    const fetchWines = () => {
+      fetch('/wines')
         .then(res => {
           if (res.ok) {
-            res.json().then(setProductions)
+            res.json().then(setWines)
           } else {
             res.json().then(data => setErrors(data.error))
           }
         })
     }
 
-    const addProduction = (production) => setProductions(current => [...current, production])
+    const addWine = (wine) => setWines(current => [...current, wine])
 
-    const updateProduction = (updatedProduction) => setProductions(current => {
-      return current.map(production => {
-        if (production.id === updatedProduction.id) {
-          return updatedProduction
+    const updateWine = (updatedWine) => setWines(current => {
+      return current.map(wine => {
+        if (wine.id === updatedWine.id) {
+          return updatedWine
         } else {
-          return production
+          return wine
         }
       })
     })
 
-    const deleteProduction = (id) => setProductions(current => current.filter(p => p.id !== id))
+    const deleteWine = (id) => setWines(current => current.filter(p => p.id !== id))
 
     const updateUser = (user) => setCurrentUser(user)
 
@@ -62,16 +62,16 @@ function App() {
         {!currentUser ? <login error={'please login'} updateUser={updateUser} /> :
           <Switch>
 
-            <Route path='/productions/new'>
-              <ProductionForm addProduction={addProduction} />
+            <Route path='/wines/new'>
+              <WineForm addWine={addWine} />
             </Route>
 
-            <Route path='/productions/:id/edit'>
-              <EditProductionForm updateProduction={updateProduction} />
+            <Route path='/wines/:id/edit'>
+              <EditWineForm updateWine={updateWine} />
             </Route>
 
             <Route path='/productions/:id'>
-              <ProductionDetail deleteProduction={deleteProduction} />
+              <WineDetail deleteWine={deleteWine} />
             </Route>
 
             <Route path='/users/:id'>
@@ -83,7 +83,7 @@ function App() {
             </Route>
 
             <Route exact path='/'>
-              <Home productions={productions} />
+              <Home wines={wines} />
             </Route>
 
             <Route>
