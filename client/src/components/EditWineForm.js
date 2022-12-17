@@ -1,24 +1,33 @@
-import React, { useState, useEffect} from 'react'
-import { useParams, useHistory} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 
-function EditProductionForm({updateProduction}) {
+function EditWineForm({ updateWine }) {
   const [formData, setFormData] = useState({
-    title:'',
-    genre:'',
-    budget:'',
-    image:'',
-    director:'',
-    description:''
+    name: '',
+    year: '',
+    price: '',
+    product_information: '',
+    brand: '',
+    country: '',
+    region: '',
+    appelation: '',
+    wine_type: '',
+    varietal: '',
+    style: '',
+    abv: '',
+    taste: '',
+    body: '',
+    image: ''
   })
   const [errors, setErrors] = useState([])
-  const {id} = useParams()
+  const { id } = useParams()
   const history = useHistory()
 
   useEffect(() => {
-    // GET `/productions/${id}`
-  },[])
+    // GET `/wines/${id}`
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -26,40 +35,67 @@ function EditProductionForm({updateProduction}) {
   }
 
 
-  function onSubmit(e){
+  function onSubmit(e) {
     e.preventDefault()
-    //PATCH to `/productions/${id}`
+    //PATCH to `/wines/${id}`
   }
-    return (
-      <div className='App'>
+  return (
+    <div className='App'>
       <Form onSubmit={onSubmit}>
-        <label>Title </label>
-        <input type='text' name='title' value={formData.title} onChange={handleChange} />
-        
-        <label> Genre</label>
-        <input type='text' name='genre' value={formData.genre} onChange={handleChange} />
-      
-        <label>Budget</label>
-        <input type='number' name='budget' value={formData.budget} onChange={handleChange} />
-      
+        <label>Name </label>
+        <input type='text' name='name' value={formData.name} onChange={handleChange} />
+
+        <label>Brand</label>
+        <input type='text' name='brand' value={formData.brand} onChange={handleChange} />
+
+        <label>Year</label>
+        <input type='number' name='year' value={formData.year} onChange={handleChange} />
+
+        <label>Price</label>
+        <input type='number' name='price' value={formData.price} onChange={handleChange} />
+
+        <label> Description </label>
+        <input type='text' rows='4' cols='50' name='product_information' value={formData.product_information} onChange={handleChange} />
+
+        <label>Country</label>
+        <textarea type='text' name='country' value={formData.country} onChange={handleChange} />
+
+        <label>Region</label>
+        <textarea type='text' name='region' value={formData.region} onChange={handleChange} />
+
+        <label>Appelation</label>
+        <textarea type='text' name='appelation' value={formData.appelation} onChange={handleChange} />
+
+        <label>Wine Type</label>
+        <textarea type='text' name='wine_type' value={formData.wine_type} onChange={handleChange} />
+
+        <label>Varietal</label>
+        <textarea type='text' name='varietal' value={formData.varietal} onChange={handleChange} />
+
+        <label>Style</label>
+        <textarea type='text' name='style' value={formData.style} onChange={handleChange} />
+
+        <label>Taste</label>
+        <textarea type='text' name='taste' value={formData.taste} onChange={handleChange} />
+
+        <label>Body</label>
+        <textarea type='text' name='body' value={formData.body} onChange={handleChange} />
+
+        <label>ABV</label>
+        <input type='number' name='abv' value={formData.abv} onChange={handleChange} />
+
         <label>Image</label>
         <input type='text' name='image' value={formData.image} onChange={handleChange} />
-      
-        <label>Director</label>
-        <input type='text' name='director' value={formData.director} onChange={handleChange} />
-      
-        <label>Description</label>
-        <textarea type='text' rows='4' cols='50' name='description' value={formData.description} onChange={handleChange} />
-      
-        <input type='submit' value='Update Production' />
-      </Form>
-      </div>
-    )
-  }
-  
-  export default EditProductionForm
 
-  const Form = styled.form`
+        <input type='submit' value='Add Wine' />
+      </Form>
+    </div>
+  )
+}
+
+export default EditProductionForm
+
+const Form = styled.form`
     display:flex;
     flex-direction:column;
     width: 400px;
