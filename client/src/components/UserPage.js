@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 function UserPage(){
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
@@ -15,7 +15,7 @@ function UserPage(){
                     setUser(user)
                     setLoading(false)
                 })
-            }else {
+            } else {
                 res.json().then(data => setErrors(data.error))
             }
         })
@@ -27,7 +27,7 @@ function UserPage(){
     return (
         <div>
             <h1>{user.name}</h1>
-            <h3>Tickets</h3>
+            {/* <h3>Tickets</h3>
             <ul>
                 {user.tickets.map(ticket => (
                 <li>
@@ -35,7 +35,7 @@ function UserPage(){
                     <p>Price: {ticket.price}</p>
                 </li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     )
 }
