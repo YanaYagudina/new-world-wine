@@ -33,7 +33,7 @@ function ProductionDetail({ deleteProduction }) {
   }
   if(errors) return <div>{errors}</div>
 
-  const { id, title, budget, genre, image, description, director } = production
+  const { id, name, budget, genre, image, description, director } = production
   //Place holder data, will be replaced in the assosiations lecture. 
   const crew_members = ['Lily-Mai Harding', 'Cathy Luna', 'Tiernan Daugherty', 'Giselle Nava', 'Alister Wallis', 'Aishah Rowland', 'Keiren Bernal', 'Aqsa Parrish', 'Daanyal Laing', 'Hollie Haas']
   return (
@@ -41,12 +41,22 @@ function ProductionDetail({ deleteProduction }) {
       <h1>{title}</h1>
       <div className='wrapper'>
         <div>
-          <h3>Director:</h3>
-          <p>{director}</p>
-          <h3>Genre:</h3>
-          <p>{genre}</p>
+          <p>{name}</p>
+          <p>{year}</p>
+          <h3>Wine Type:</h3>
+          <p>{wine_type}</p>
+          <h3>ABV:</h3>
+          <p>{abv} %</p>
+          <h3>Varietal:</h3>
+          <p>{varietal}</p>
           <h3>Description:</h3>
-          <p>{description}</p>
+          <p>{product_information}</p>
+          <h3>Taste:</h3>
+          <p>{taste}</p>
+          <h3>Body:</h3>
+          <p>{body}</p>
+          <h3>Style:</h3>
+          <p>{style}</p>
           <h2>Crew Memebers</h2>
           <ul>
             {crew_members.map(crew => <li>{crew}</li>)}

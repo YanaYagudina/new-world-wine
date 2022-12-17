@@ -2,14 +2,18 @@ import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
 
-function ProductionCard({production}) {
-    const {title, budget, genre, image, id} = production
+function WineCard({production}) {
+    const {id, name, brand, year, country, region, appelation, price, image } = production
     return (
       <Card>
       <div>
-      <Link to={`/productions/${id}`}> <h2>{title}</h2></Link>
-        <p>{genre}</p>
-        <p>$ {budget}</p>
+      <Link to={`/wines/${id}`}> <h2>{name}</h2></Link>
+        <p>{brand}</p>
+        <p>{year}</p>
+        <p>{country}</p>
+        <p>{region}</p>
+        <p>{appelation}</p>
+        <p>$ {price}</p>
       </div>
       <img src={image}/>
       </Card>
@@ -17,7 +21,7 @@ function ProductionCard({production}) {
     )
   }
   
-  export default ProductionCard
+  export default WineCard
 
 
   const Card = styled.li`
