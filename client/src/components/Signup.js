@@ -31,7 +31,7 @@ function SignUp() {
                 res.json().then(user => {
                     history.push(`/users/${user.id}`)
                 })
-            }else {
+            } else {
                 res.json().then(json => setErrors(Object.entries(json.errors)))
             }
         })
@@ -62,6 +62,7 @@ function SignUp() {
         
        
         <input type='submit' value='Sign up!' />
+        
       </Form>
       {errors?errors.map(e => <div>{e[0]+': ' + e[1]}</div>):null}
         </>
