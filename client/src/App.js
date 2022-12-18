@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
 import Home from './components/Home'
