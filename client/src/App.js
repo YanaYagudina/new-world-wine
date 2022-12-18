@@ -1,4 +1,4 @@
-import { Router, Route } from "react-router-dom";
+import { Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
 import Home from './components/Home'
@@ -25,7 +25,8 @@ function App() {
             fetchWines()
           })
       }
-    }, [])
+    })
+  }, [])
     // GET '/wines'
 
     const fetchWines = () => {
@@ -38,6 +39,8 @@ function App() {
           }
         })
     }
+
+  
 
     const addWine = (wine) => setWines(current => [...current, wine])
 
@@ -61,28 +64,42 @@ function App() {
       <>
         <GlobalStyle />
         <Navigation updateUser={updateUser} />
-        {!currentUser ? <login error={'please login'} updateUser={updateUser} /> :
-          <Router>
+        {!currentUser ? <Login error={'please login'} updateUser={updateUser} /> :
+          <Switch>
 
-            <Route path='/wines/new' element={<WineForm addWine={addWine} />}/>
+            <Route exact path='/wines/new'>
+              <WineForm addWine={addWine} />
+            </Route>
 
-            <Route path='/wines/:id/edit' element={<EditWineForm updateWine={updateWine} />}/>
+            <Route exact path='/wines/:id/edit'> 
+              <EditWineForm updateWine={updateWine} />
+            </Route>
 
-            <Route path='/wines/:id' element={<WineDetails deleteWine={deleteWine} />}/>
+            <Route path='/wines/:id'>
+              <WineDetails deleteWine={deleteWine} />
+            </Route>
 
-            <Route path='/users/:id' element={<UserPage updateUser={updateUser} />}/>
+            <Route exact path='/users/:id' >
+              <UserPage updateUser={updateUser} />
+            </Route>
 
-            <Route path='login' element={<Login updateUser={updateUser} />}/>
+            <Route path='login'>
+              <Login updateUser={updateUser} />
+            </Route>
 
-            <Route path='/' element={<Home wines={wines} />}/>
+            <Route exact path='/'>
+              <Home wines={wines} />
+            </Route>
 
-            <Route element={<NotFound />}/>
-          </Router>
+            <Route>
+              <NotFound />
+            </Route> 
+
+          </Switch>
         }
 
       </>
     )
-  })
 }
 export default App
 

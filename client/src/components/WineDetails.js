@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useHistory} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -8,7 +8,7 @@ function WineDetails({ deleteWine }) {
   const [errors, setErrors] = useState(false)
 
   const params = useParams()
-  const history = useNavigate()
+  const history = useHistory()
 
   console.log(params)
 

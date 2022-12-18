@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Form } from '../styled/Form'
 
 function Login(updateUser) {
@@ -10,7 +10,7 @@ function Login(updateUser) {
   })
   const [signup, setSignup] = useState(false)
   const [errors, setErrors] = useState([])
-  const history = useNavigate()
+  const history = useHistory()
 
   const { name, password } = formData
 
