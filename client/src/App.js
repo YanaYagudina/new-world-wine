@@ -1,12 +1,14 @@
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
 import Home from './components/Home'
 import WineForm from './components/WineForm'
 import EditWineForm from './components/EditWineForm'
 import Navigation from './components/Navigation'
-import WineDetail from './components/WineDetail'
+import WineDetails from './components/WineDetails'
 import NotFound from './components/NotFound'
+import UserPage from './components/UserPage'
+import Login from './components/Login'
 
 function App() {
   const [wines, setWines] = useState([])
@@ -15,7 +17,7 @@ function App() {
 
   useEffect(() => {
     fetch('/authorized_user')
-    then(res => {
+    .then(res => {
       if (res.ok) {
         res.json()
           .then(user => {
@@ -60,36 +62,22 @@ function App() {
         <GlobalStyle />
         <Navigation updateUser={updateUser} />
         {!currentUser ? <login error={'please login'} updateUser={updateUser} /> :
-          <Switch>
+          <Router>
 
-            <Route path='/wines/new'>
-              <WineForm addWine={addWine} />
-            </Route>
+            <Route path='/wines/new' element={<WineForm addWine={addWine} />}/>
 
-            <Route path='/wines/:id/edit'>
-              <EditWineForm updateWine={updateWine} />
-            </Route>
+            <Route path='/wines/:id/edit' element={<EditWineForm updateWine={updateWine} />}/>
 
-            <Route path='/productions/:id'>
-              <WineDetail deleteWine={deleteWine} />
-            </Route>
+            <Route path='/wines/:id' element={<WineDetails deleteWine={deleteWine} />}/>
 
-            <Route path='/users/:id'>
-              <UserPage updateUser={updateUser} />
-            </Route>
+            <Route path='/users/:id' element={<UserPage updateUser={updateUser} />}/>
 
-            <Route path='login'>
-              <Login updateUser={updateUser} />
-            </Route>
+            <Route path='login' element={<Login updateUser={updateUser} />}/>
 
-            <Route exact path='/'>
-              <Home wines={wines} />
-            </Route>
+            <Route path='/' element={<Home wines={wines} />}/>
 
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
+            <Route element={<NotFound />}/>
+          </Router>
         }
 
       </>

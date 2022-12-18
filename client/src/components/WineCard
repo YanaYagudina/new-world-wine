@@ -2,8 +2,9 @@ import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
 
-function WineCard({production}) {
-    const {id, name, brand, year, country, region, appelation, price, image } = production
+function WineCard({wine}) {
+    const {id, name, brand, year, country, region, appelation, price, image } = wine
+    console.log(wine)
     return (
       <Card>
       <div>
@@ -29,7 +30,7 @@ function WineCard({production}) {
     flex-direction:row;
     justify-content:start;
     font-family:Arial, sans-serif;
-    margin:5px;
+    margin:10px;
     &:hover {
       transform: scale(1.15);
       transform-origin: top left;

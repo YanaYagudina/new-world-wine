@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
 
 
 function EditWineForm({ updateWine }) {
@@ -22,12 +21,12 @@ function EditWineForm({ updateWine }) {
     image: ''
   })
   const [errors, setErrors] = useState([])
-  const { id } = useParams()
-  const history = useHistory()
-
+  const {id} = useParams()
   useEffect(() => {
-    // GET `/wines/${id}`
-  }, [])
+    fetch(`/wines/${id}`)
+    .then(res => res.json())
+    .then(setFormData)
+  },[])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -38,10 +37,24 @@ function EditWineForm({ updateWine }) {
   function onSubmit(e) {
     e.preventDefault()
     //PATCH to `/wines/${id}`
+    fetch(`/wines/${id}`,{
+      method:'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body:JSON.stringify(formData)
+    })
+    .then(res => {
+      if(res.ok){
+        res.json().then(updateWine)
+      } else {
+        //Display errors
+        res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
+      }
+    })
   }
   return (
     <div className='App'>
-      <Form onSubmit={onSubmit}>
+      {errors?errors.map(e => <div>{e}</div>):null}
+      <form onSubmit={onSubmit}>
         <label>Name </label>
         <input type='text' name='name' value={formData.name} onChange={handleChange} />
 
@@ -87,28 +100,11 @@ function EditWineForm({ updateWine }) {
         <label>Image</label>
         <input type='text' name='image' value={formData.image} onChange={handleChange} />
 
-        <input type='submit' value='Add Wine' />
-      </Form>
+        <input type='submit' value='Update Wine' />
+      </form>
+      {errors?errors.map(e => <h2 style={{color:'red'}}>{e.toUpperCase()}</h2>):null}
     </div>
   )
 }
 
-export default EditProductionForm
-
-const Form = styled.form`
-    display:flex;
-    flex-direction:column;
-    width: 400px;
-    margin:auto;
-    font-family:Arial;
-    font-size:30px;
-    input[type=submit]{
-      background-color:#42ddf5;
-      color: white;
-      height:40px;
-      font-family:Arial;
-      font-size:30px;
-      margin-top:10px;
-      margin-bottom:10px;
-    }
-  `
+export default EditWineForm

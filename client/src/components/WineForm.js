@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 
 function WineForm({ addWine }) {
   const [formData, setFormData] = useState({
@@ -22,8 +20,6 @@ function WineForm({ addWine }) {
 
   })
   const [errors, setErrors] = useState([])
-  const history = useHistory()
-
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -32,6 +28,7 @@ function WineForm({ addWine }) {
 
   function onSubmit(e) {
     e.preventDefault()
+
     // // POST '/wines'
     fetch('/wines', {
       method: 'POST',
@@ -40,14 +37,10 @@ function WineForm({ addWine }) {
     })
       .then(res => {
         if (res.ok) {
-          res.json().then(console.log)
+          res.json().then(addWine)
         } else {
-          res.json().then(data => {
-            console.log('Error: ', Object.entries(data.errors).map(e => `${e[0]}: ${e[1]}`))
-            //data -> {errors:{}} -> Object.entries(data.errors) -> [[title,['can't be blank']]]
-            // .map(e => e[0] : e[1]) -> ['title: can't be blank']
-            setErrors(Object.entries(data.errors).map(e => `${e[0]}: ${e[1]}`))
-          })
+          //Display errors
+          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
         }
       })
   }
@@ -55,7 +48,7 @@ function WineForm({ addWine }) {
   return (
     <div className='App'>
       {errors ? errors.map(e => <div>{e}</div>) : null}
-      <Form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <label>Name </label>
         <input type='text' name='name' value={formData.name} onChange={handleChange} />
 
@@ -73,7 +66,7 @@ function WineForm({ addWine }) {
 
         <label>Country</label>
         <textarea type='text' name='country' value={formData.country} onChange={handleChange} />
-        
+
         <label>Region</label>
         <textarea type='text' name='region' value={formData.region} onChange={handleChange} />
 
@@ -102,27 +95,11 @@ function WineForm({ addWine }) {
         <input type='text' name='image' value={formData.image} onChange={handleChange} />
 
         <input type='submit' value='Add Wine' />
-      </Form>
+      </form>
+      {errors?errors.map(e => <h2 style={{color:'red'}}>{e.toUpperCase()}</h2>):null}
     </div>
   )
 }
 
 export default WineForm
 
-const Form = styled.form`
-    display:flex;
-    flex-direction:column;
-    width: 400px;
-    margin:auto;
-    font-family:Arial;
-    font-size:30px;
-    input[type=submit]{
-      background-color:#42ddf5;
-      color: white;
-      height:40px;
-      font-family:Arial;
-      font-size:30px;
-      margin-top:10px;
-      margin-bottom:10px;
-    }
-  `

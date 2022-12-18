@@ -1,77 +1,99 @@
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-function WineDetail({ deleteWine }) {
-  // const [wine, setWine] = useState({ crew_members: [], performers_and_roles: [] })
-  const [errors, setErrors] = useState()
+function WineDetails({ deleteWine }) {
+  const [wine, setWine] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [errors, setErrors] = useState(false)
 
   const params = useParams()
-  const history = useHistory()
+  const history = useNavigate()
 
   console.log(params)
 
   useEffect(() => {
     //GET to '/wines/:id'
-    fetch(`/wines/1000`)
+    fetch(`/wines/${params.id}`)
       .then(res => {
         if (res.ok) {
-          console.log(res)
-          res.json().then(setWine)
-        } else {
           res.json().then(data => {
-            console.log(data)
-            setErrors(data.errors)
+            setWine(data)
+            setLoading(false)
           })
+        } else {
+          console.log('error')
+          res.json().then(data => setErrors(data.error))
         }
       })
   }, [])
 
   function handleDelete() {
-    //DELETE to `/wines/${params.id}`
-
+    //DELETE to `/productions/${params.id}`
+    fetch(`/wines/${params.id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => {
+        if (res.ok) {
+          deleteWine(id)
+          history.push('/')
+        } else {
+          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
+        }
+      })
   }
-  if(errors) return <div>{errors}</div>
 
-  const { id, name, year, wine_type, abv, varietal, product_information, taste, body, style } = production
-  //Place holder data, will be replaced in the assosiations lecture. 
-  // const crew_members = ['Lily-Mai Harding', 'Cathy Luna', 'Tiernan Daugherty', 'Giselle Nava', 'Alister Wallis', 'Aishah Rowland', 'Keiren Bernal', 'Aqsa Parrish', 'Daanyal Laing', 'Hollie Haas']
+  const handleBuy = () => {
+    fetch(`/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ wine_id: id, user_id: 1, price: 30.50 })
+    })
+      .then(res => {
+        if (res.ok) {
+          history.push('/users/1')
+        } else {
+          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
+        }
+      })
+  }
+
+  if (loading) return <h1>Loading</h1>
+  if (errors) return <div>{errors}</div>
+
+  const { id, name, year, wine_type, abv, varietal, product_information, taste, body, style, image } = wine
+
   return (
     <CardDetail>
-      <h1>{title}</h1>
+      <h1>{name}</h1>
       <div className='wrapper'>
-        <div>
-          <p>{name}</p>
-          <p>{year}</p>
-          <h3>Wine Type:</h3>
-          <p>{wine_type}</p>
-          <h3>ABV:</h3>
-          <p>{abv} %</p>
-          <h3>Varietal:</h3>
-          <p>{varietal}</p>
-          <h3>Description:</h3>
-          <p>{product_information}</p>
-          <h3>Taste:</h3>
-          <p>{taste}</p>
-          <h3>Body:</h3>
-          <p>{body}</p>
-          <h3>Style:</h3>
-          <p>{style}</p>
-          <h2>Crew Memebers</h2>
-          {/* <ul>
-            {crew_members.map(crew => <li>{crew}</li>)}
-          </ul> */}
-        </div>
-        {/* <img src={image} /> */}
+        <p>{name}</p>
+        <p>{year}</p>
+        <h3>Wine Type:</h3>
+        <p>{wine_type}</p>
+        <h3>ABV:</h3>
+        <p>{abv} %</p>
+        <h3>Varietal:</h3>
+        <p>{varietal}</p>
+        <h3>Description:</h3>
+        <p>{product_information}</p>
+        <h3>Taste:</h3>
+        <p>{taste}</p>
+        <h3>Body:</h3>
+        <p>{body}</p>
+        <h3>Style:</h3>
+        <p>{style}</p>
+        <img src={image} alt=""/>
       </div>
       <button><Link to={`/wines/${id}/edit`}>Edit Wine</Link></button>
       <button onClick={handleDelete}>Delete Wine</button>
-      <button >Buy Wine</button>
+      <button onClick={handleBuy} >your order - ticket</button>
     </CardDetail>
   )
 }
 
-export default WineDetail
+export default WineDetails
 const CardDetail = styled.li`
     display:flex;
     flex-direction:column;
