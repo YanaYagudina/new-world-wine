@@ -15,7 +15,7 @@ function App() {
   const [wines, setWines] = useState([])
   const [errors, setErrors] = useState(false)
   const [currentUser, setCurrentUser] = useState(false)
-
+  //Comment
   useEffect(() => {
     fetch('/authorized_user')
     .then(res => {
