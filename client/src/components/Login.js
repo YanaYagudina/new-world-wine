@@ -12,12 +12,12 @@ function Login({updateUser}) {
   const [errors, setErrors] = useState([])
   const history = useHistory()
 
-  const { name, password } = formData
+  const { username, password } = formData
 
   function onSubmit(e) {
     e.preventDefault()
     const user = {
-      name,
+      username,
       password
     }
     let url = `/login`
@@ -52,7 +52,7 @@ function Login({updateUser}) {
         <label>
           Username
         </label>
-        <input type='text' name='name' value={name} onChange={handleChange} />
+        <input type='text' name='username' value={username} onChange={handleChange} />
         
         <label>
           Password

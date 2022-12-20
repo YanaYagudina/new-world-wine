@@ -32,6 +32,9 @@ Wine.create(name: "Borrasca Prosecco Rose", year: 2018, price: 16.99, product_in
 
 puts "Creating users..."
 
+puts "Creating TEST user..."
+User.create(first_name: "Yana", last_name: "Y", email: "test@gmail.com", location: "test", age: 40, username: "test", avatar_img: "test", password: "12345", is_admin: true )
+
 20.times do
 User.create(
         first_name: Faker::Name.first_name,
@@ -45,9 +48,6 @@ User.create(
         is_admin: false 
     )
 end 
-
-puts "Creating TEST user..."
-User.create(first_name: "Yana", last_name: "Y", email: "test@gmail.com", location: "test", age: 40, username: "test", avatar_img: "test", password: "12345", is_admin: true )
 
 
 
