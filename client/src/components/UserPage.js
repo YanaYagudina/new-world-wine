@@ -30,15 +30,18 @@ function UserPage(){
             <h1>{user.name}</h1>
             <h3>Orders</h3>
             <ul>
-                {user.orders.map(order => (
-                <li>
-                    <h2>{order.production.title}</h2>
-                    {/* <p>Price: {order.price}</p> */}
-                </li>
-                ))}
+
             </ul>
         </div>
     )
 }
 
 export default UserPage
+
+
+// {user.orders.map(order => (
+//     <li>
+//         <h2>{order.production.title}</h2>
+//         {/* <p>Price: {order.price}</p> */}
+//     </li>
+//     ))}

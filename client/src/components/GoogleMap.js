@@ -46,10 +46,9 @@ export default function MapPage(){
                             center={defaultCenter}
                             options={options}
                         >
-                            {add.map((marker)=> (
                                 <Marker 
                                     id="marker"
-                                    key={marker.post.title} 
+                                    // key={marker.post.title} 
                                     position={{lat: 39.723561037934786,  lng: -105.13286373835427}}
                                     icon={{
                                         url:pnglogo,
@@ -58,7 +57,6 @@ export default function MapPage(){
                                         anchor: new window.google.maps.Point(15,15),
                                     }}
                                 />
-                            ))}
 
                             {selected ? (
                             <InfoWindow position={{ lat: 39.723561037934786, lng: -105.13286373835427}} onCloseClick={()=>{setSelected(null)}} >

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import WineContainer from './WineContainer'
 import { useEffect, useState } from "react"
+
+
 function Home({ wines }) {
   const [recentWine, setRecentWine] = useState([]);
 

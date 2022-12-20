@@ -3,7 +3,7 @@ class WinesController < ApplicationController
     # , only: [:index, :show]
     
     def index
-        render json Wine.all, status: :ok
+        render json: Wine.all, status: :ok
     end
 
     def show
