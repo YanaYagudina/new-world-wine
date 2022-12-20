@@ -1,21 +1,29 @@
 import styled from 'styled-components'
 import WineContainer from './WineContainer'
+import { useEffect, useState } from "react"
+function Home({ wines }) {
+  const [recentWine, setRecentWine] = useState([]);
 
-function Home({wines}){
-    return(
+  useEffect(() => {
+    fetch("/wines")
+      .then((r) => r.json())
+      .then((recentWine) => {
+        setRecentWine(recentWine);
+      });
+  }, []);
+  return (
     <div>
-        <Image /> 
-        <WineContainer wines={wines} />
+      <Image />
+      <WineContainer wines={wines} />
     </div>
-    )
+  )
 }
 
 export default Home
 
 const Image = styled.img.attrs(() => ({
-    src:'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80', 
-  }))`
+  src: '../img/backgraund.png',
+}))`
     position: absolute;
     z-index:-1;
   `
-  

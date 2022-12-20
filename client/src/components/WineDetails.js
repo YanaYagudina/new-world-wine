@@ -1,4 +1,4 @@
-import { Link, useParams, useHistory} from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -84,7 +84,7 @@ function WineDetails({ deleteWine }) {
         <p>{body}</p>
         <h3>Style:</h3>
         <p>{style}</p>
-        <img src={image} alt=""/>
+        <img src={image} alt="" />
       </div>
       <button><Link to={`/wines/${id}/edit`}>Edit Wine</Link></button>
       <button onClick={handleDelete}>Delete Wine</button>

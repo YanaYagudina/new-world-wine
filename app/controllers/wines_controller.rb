@@ -1,7 +1,7 @@
 class WinesController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
- 
+    skip_before_action :authorized_user
+    # , only: [:index, :show]
+    
     def index
         render json Wine.all, status: :ok
     end
@@ -12,37 +12,24 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     end
 
     def create
-        @wine = Wine.create!(wine_params)
-        if wine.valid?
-            render json: @wine, status: :created
-        else
-            render json: {errors: production.errors.full_messages}, status: :unprocessable_entity
-        # => or without @?
+        wine = Wine.create!(wine_params)
+        render json: wine, status: :created
     end
 
     def update
-        @wine.update!(wine_params)
-        render json: @wine, status: :accepted
+        wine.update!(wine_params)
+        render json: wine, status: :accepted
     end
 
     def destroy
-        @wine.destroy
+        wine.destroy
         render json: {}
     end
 
     private
 
     def wine_params
-        params.permit ( :name, :year, :price, :product_information, :brand, :country, :region, :appellation, :wine_type, :varietal, :style, :abv, :taste, :body)
+        params.permit( :name, :year, :price, :product_information, :brand, :country, :region, :appellation, :wine_type, :varietal, :style, :abv, :taste, :body)
     end 
 
-    def render_unprocessable_entity(invalid)
-        render json: {errors: invalid.record.errors}, status: :unprocessable_entity
-    end
-
-    def render_not_found
-        render lson: {errors: "Wine Not Found"}, status: :not_found
-    end
-
-    
 end

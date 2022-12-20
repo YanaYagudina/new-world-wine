@@ -38,15 +38,18 @@ User.create(
         last_name: Faker::Name.last_name,
         email: Faker::Internet.email,
         location: Faker::Address.full_address,
-        age: rand(5..80),
+        age: rand(21..80),
         username: Faker::Internet.username(specifier: 5..10),
         avatar_img: Faker::Avatar.image,
-        password_digest: "12345"
+        password: "12345",
+        is_admin: false 
     )
 end 
 
 puts "Creating TEST user..."
-User.create(first_name: "test", last_name: "test", email: "test", location: "test", age: 40, username: "test", avatar_img: "test", password_digest: "12345" )
+User.create(first_name: "Yana", last_name: "Y", email: "test@gmail.com", location: "test", age: 40, username: "test", avatar_img: "test", password: "12345", is_admin: true )
+
+
 
 puts "Creating comment..."
 

@@ -1,14 +1,14 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 
-function WineCard({wine}) {
-    const {id, name, brand, year, country, region, appelation, price, image } = wine
-    console.log(wine)
-    return (
-      <Card>
+function WineCard({ wine }) {
+  const { id, name, brand, year, country, region, appelation, price, image } = wine
+  console.log(wine)
+  return (
+    <Card>
       <div>
-      <Link to={`/wines/${id}`}> <h2>{name}</h2></Link>
+        <Link to={`/wines/${id}`}> <h2>{name}</h2></Link>
         <p>{brand}</p>
         <p>{year}</p>
         <p>{country}</p>
@@ -16,16 +16,16 @@ function WineCard({wine}) {
         <p>{appelation}</p>
         <p>$ {price}</p>
       </div>
-      <img src={image}/>
-      </Card>
-     
-    )
-  }
-  
-  export default WineCard
+      <img src={image} />
+    </Card>
+
+  )
+}
+
+export default WineCard
 
 
-  const Card = styled.li`
+const Card = styled.li`
     display:flex;
     flex-direction:row;
     justify-content:start;
@@ -46,7 +46,7 @@ function WineCard({wine}) {
     }
     position:relative;
     div{
-     position:absolute;
+    position:absolute;
     
     }
   `

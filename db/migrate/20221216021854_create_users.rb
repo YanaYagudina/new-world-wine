@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :avatar_img
       t.string :username
       t.string :password_digest
+      t.boolean :is_admin 
 
       t.timestamps
     end

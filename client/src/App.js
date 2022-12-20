@@ -9,6 +9,7 @@ import WineDetails from './components/WineDetails'
 import NotFound from './components/NotFound'
 import UserPage from './components/UserPage'
 import Login from './components/Login'
+import AboutUs from './components/AboutUs'
 
 function App() {
   const [wines, setWines] = useState([])
@@ -64,18 +65,22 @@ function App() {
       <>
         <GlobalStyle />
         <Navigation updateUser={updateUser} />
-        {!currentUser ? <Login error={'please login'} updateUser={updateUser} /> :
+        {/* {!currentUser ? <Login error={'please login'} updateUser={updateUser} /> : */}
           <Switch>
 
             <Route exact path='/wines/new'>
               <WineForm addWine={addWine} />
             </Route>
 
-            <Route exact path='/wines/:id/edit'> 
+            <Route path='/wines/:id/edit'> 
               <EditWineForm updateWine={updateWine} />
             </Route>
 
-            <Route path='/wines/:id'>
+            <Route exact path='/AboutUs'> 
+              <AboutUs/>
+            </Route>
+
+            <Route exact path='/wines/:id'>
               <WineDetails deleteWine={deleteWine} />
             </Route>
 
@@ -83,7 +88,7 @@ function App() {
               <UserPage updateUser={updateUser} />
             </Route>
 
-            <Route path='login'>
+            <Route path='/login'>
               <Login updateUser={updateUser} />
             </Route>
 
@@ -96,8 +101,6 @@ function App() {
             </Route> 
 
           </Switch>
-        }
-
       </>
     )
 }
