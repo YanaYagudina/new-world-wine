@@ -28,36 +28,7 @@ function WineDetail({ deleteWine }) {
       })
   }, [])
 
-  function handleDelete() {
-    //DELETE to `/productions/${params.id}`
-    fetch(`/wines/${params.id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(res => {
-        if (res.ok) {
-          deleteWine(id)
-          history.push('/')
-        } else {
-          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
-        }
-      })
-  }
-
-  const handleBuy = () => {
-    fetch(`/orders`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ wine_id: id, user_id: 1, price: 30.50 })
-    })
-      .then(res => {
-        if (res.ok) {
-          history.push('/users/1')
-        } else {
-          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
-        }
-      })
-  }
+  
 
   if (loading) return <h1>Loading</h1>
   if (errors) return <div>{errors}</div>
