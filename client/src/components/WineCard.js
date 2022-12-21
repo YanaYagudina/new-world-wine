@@ -63,7 +63,7 @@ const [showDetails, setShowDetails] = useState(false)
           <br />
           {/* <Link to={`/art/${id}`}>See more</Link> */}
       </div>
-      
+    //   comment - delete
     // </Card>
 
   )
