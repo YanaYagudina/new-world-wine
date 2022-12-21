@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-// import {Form} from '../styled/Form'
-
 
 function WineForm({ addWine }) {
   const [formData, setFormData] = useState({
@@ -40,7 +38,7 @@ function WineForm({ addWine }) {
         body: JSON.stringify({ ...formData, glass: 0 }),
       };
 
-    fetch("/wines",)
+    fetch("http://localhost:4000/wines",)
       .then((resp) => resp.json())
       .then((bottle) => {
         addWine(bottle);
@@ -253,3 +251,4 @@ function WineForm({ addWine }) {
 // }
 
 export default WineForm
+

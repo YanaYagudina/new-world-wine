@@ -76,22 +76,3 @@ export default function MapPage() {
 
     )
 }
-
-
-// {!selected.marker ? <button id="like-button" class="like-button" 
-// onClick={(e)=>{
-//             // e.preventDefault()
-//             const id = selected.bottle.id;
-//             const updatedBottle = {
-//                 isClaimed: true,
-//             };
-//             fetch(`/bottles/${id}`,{
-//                 method:'PATCH',
-//                 headers:{'Content-Type': 'application/json'},
-//                 body:JSON.stringify(updatedBottle)})
-//                 .then(response => response.json())
-//                 .then((data) => console.log(data));
-//             window.location.reload()
-//         }} >CLAIM</button> 
-// : 
-// <button id="claimed-button" class="claimed-button" >CLAIMED</button>}

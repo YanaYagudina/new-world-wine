@@ -1,6 +1,8 @@
 class WinesController < ApplicationController
     skip_before_action :authorized_user
     # , only: [:index, :show]
+
+   # before_action :admin_only, only: [:create, :update, :destroy]
     
     def index
         render json: Wine.all, status: :ok
@@ -32,4 +34,6 @@ class WinesController < ApplicationController
         params.permit( :name, :year, :price, :product_information, :brand, :country, :region, :appellation, :wine_type, :varietal, :style, :abv, :taste, :body)
     end 
 
+    # def admin_only
+    # end
 end

@@ -1,9 +1,10 @@
+import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
-function Navigation(updateUser) {
+function AdminPage(updateUser) {
   const [menu, setMenu] = useState(false)
 
   const handleLogOut = () => {
@@ -32,7 +33,6 @@ function Navigation(updateUser) {
             <li><Link to='/login'>Login</Link></li>
             <li><Link to='/wines/new'>New Wine</Link></li>
             <li><Link to='/'> Home</Link></li>
-        
           </ul>
         }
       </Menu>
@@ -41,7 +41,7 @@ function Navigation(updateUser) {
   )
 }
 
-export default Navigation
+export default AdminPage
 
 
 const NavH1 = styled.h1`
