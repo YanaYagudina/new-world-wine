@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
 import React, {useState} from "react";
 import styled from 'styled-components'
 import WineDetail from './WineDetail'
 
 
 function WineCard({ wine }) {
-  const { id, name, brand, year, country, region, appelation, price, image } = wine
+  
+  const { name, varietal, year, country, region, appelation, price, image } = wine
 //   console.log(wine)
 const [showDetails, setShowDetails] = useState(false)
     
@@ -20,10 +20,9 @@ const [showDetails, setShowDetails] = useState(false)
   return (
     // <Card>
       <div>
-        {/* <Link to={`/wines/${id}`}> <h2>{name}</h2></Link> */}
         <img src={image} />
         <p>{name}</p>
-        <p>{brand}</p>
+        <p>{varietal}</p>
         <p>{year}</p>
         <p>{country}</p>
         <p>{region}</p>
