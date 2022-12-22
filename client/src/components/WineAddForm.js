@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Form } from '../styled/Form'
+import React, { useState} from 'react'
+import {Form} from '../styled/Form'
 
 
-function EditWineForm({ updateWine }) {
+function WineAddForm({addWine}) {
   const [formData, setFormData] = useState({
     name: '',
     year: '',
@@ -22,35 +21,28 @@ function EditWineForm({ updateWine }) {
     image: ''
   })
   const [errors, setErrors] = useState([])
-  const { id } = useParams()
-  useEffect(() => {
-    fetch(`/wines/${id}`)
-      .then(res => res.json())
-      .then(setFormData)
-  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
-
-  function onSubmit(e) {
+  function onSubmit(e){
     e.preventDefault()
-    //PATCH to `/wines/${id}`
-    fetch(`/wines/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+    
+    fetch('/wines',{
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:JSON.stringify({...formData, ongoing:true})
     })
-      .then(res => {
-        if (res.ok) {
-          res.json().then(updateWine)
-        } else {
-          //Display errors
-          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
-        }
-      })
+    .then(res => {
+      if(res.ok){
+        res.json().then(addWine)
+      } else {
+        //Display errors
+        res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
+      }
+    })
   }
   return (
     <div className='App'>
@@ -185,18 +177,6 @@ function EditWineForm({ updateWine }) {
           onChange={handleChange}
         />
 
-
-        {/* <label htmlFor="link">Project Homepage</label>
-        <input type="text" id="link" name="link" /> */}
-        {/* <label htmlFor="link">Wine Homepage</label>
-            <input
-                type="text"
-                id="link"
-                name="link"
-                value={link}
-                onChange={handleChange}
-            /> */}
-
         <label htmlFor="image">Image</label>
         <input
           type="text"
@@ -205,10 +185,10 @@ function EditWineForm({ updateWine }) {
           onChange={handleChange}
         />
 
-        <button type="submit">Update Wine</button>
+        <button type="submit">Add Wine</button>
       </Form>
     </div>
   );
 };
-
-export default EditWineForm;
+  
+  export default WineAddForm

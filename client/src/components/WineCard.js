@@ -2,10 +2,11 @@ import React, {useState} from "react"
 import styled from 'styled-components'
 import WineDetail from './WineDetail'
 import EditWineForm from "./EditWineForm"
-import DeleteForm from "./Delete form"
+import DeleteForm from "./DeleteForm"
+import WineAddForm from "./WineAddForm"
 
 
-function WineCard({ wine, updateWine, deleteWine }) {
+function WineCard({ wine, updateWine, deleteWine, addWine }) {
   
   const { name, varietal, year, country, region, appelation, price, image } = wine
 //   console.log(wine)
@@ -36,6 +37,7 @@ const [showDetails, setShowDetails] = useState(false)
           <br />
           <EditWineForm updateWine={updateWine}/>
           <DeleteForm deleteWine={deleteWine}/>
+          <WineAddForm addWine={addWine}/>
           {/* <Link to={`/art/${id}`}>See more</Link> */}
           {/* <button onClick={handleDelete}>Delete Wine</button>
         <button onClick={handleBuy} >your order - ticket</button> */}
