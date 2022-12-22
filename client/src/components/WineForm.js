@@ -40,7 +40,7 @@ function WineForm({ addWine }) {
         body: JSON.stringify({ ...formData, glass: 0 }),
       };
 
-    fetch("/wines",)
+    fetch("/wines")
       .then((resp) => resp.json())
       .then((bottle) => {
         addWine(bottle);
@@ -225,14 +225,14 @@ function WineForm({ addWine }) {
         {/* <label htmlFor="link">Project Homepage</label>
         <input type="text" id="link" name="link" /> */}
         
-        <label htmlFor="link">Wine Homepage</label>
+        {/* <label htmlFor="link">Wine Homepage</label>
         <input
           type="text"
           id="link"
           name="link"
           onChange={handleChange}
           value={formData.link}
-        />
+        /> */}
 
         <label htmlFor="image">Image</label>
         <input

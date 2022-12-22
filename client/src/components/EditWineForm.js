@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-// import {Form} from '../styled/Form'
+import {Form} from '../styled/Form'
 
 
 function EditWineForm({ updateWine }) {

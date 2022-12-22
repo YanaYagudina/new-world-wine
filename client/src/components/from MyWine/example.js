@@ -1,72 +1,74 @@
-import React, { useState } from "react";
-import { FaPencilAlt, FaTrash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
+import {Form} from '../styled/Form'
 
-const WineBottle = ({
-  bottle,
-  onDeleteBottle,
-}) => {
-  const { id, image, name, brand, price, country, type, region, year, variental, taste, body, abv, information, food } = bottle;
-  const [bottleCount, setBottleCount] = useState(0);
-  const handleBottle = (bottleCount) => setBottleCount(bottleCount + 1);
+function EditProductionForm({updateProduction}) {
+  const [formData, setFormData] = useState({
+    title:'',
+    genre:'',
+    budget:'',
+    image:'',
+    director:'',
+    description:''
+  })
+  const [errors, setErrors] = useState([])
+  const {id} = useParams()
+  useEffect(() => {
+    fetch(`/productions/${id}`)
+    .then(res => res.json())
+    .then(setFormData)
+  },[])
 
-  // TODO: add this to the cart
-  //image, name, brand, price, country, type, region, year, variental, taste, body, abv, information, food
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
-  const handleDeleteClick = () => {
-    fetch(`http://localhost:4000/wine/${id}`, {
-      method: "DELETE",
+
+  function onSubmit(e){
+    e.preventDefault()
+    //PATCH to `/productions/${id}`
+    fetch(`/productions/${id}`,{
+      method:'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body:JSON.stringify(formData)
     })
-    onDeleteBottle(bottle)
-      .then((resp) => console.log(resp))
-      .then(onDeleteBottle(bottle));
-  };
-
-  return (
-    <li className="card">
-      <figure className="image">
-        <img src={image} alt={name} />
-
-        <button onClick={handleBottle} className="glass">🍷{bottleCount}</button>
-      </figure>
-      <section className="details">
-
-        <h4>{name}</h4>
-        <h3>{brand}</h3>
-        <h4>{year}</h4>
-        <h2>{type}</h2>
-        <h2>{variental}</h2>
-        <h2>{country}</h2>
-        <h2>{region}</h2>
-        <h2>{abv}</h2>
-        <h2>{taste}</h2>
-        <h2>{body}</h2>
-        <h1>{information}</h1>
-        <h2>{food}</h2>
-        <h4>{price}</h4>
-
-        {/* <p>{about}</p>
-        {link ? (
-          <p>
-            <a href={link}>Link</a>
-          </p>
-        ) : null} */}
-
-      </section>
-
-      <footer className="extra">
-        <span className="badge blue">Country {country}</span>
-        <div className="manage">
-          <Link to={`/wine/${id}/edit`} className="button">
-            <FaPencilAlt />
-          </Link>
-          <button onClick={handleDeleteClick}>
-            <FaTrash />
-          </button>
-        </div>
-      </footer>
-    </li>
-  );
-};
-
-export default WineBottle;
+    .then(res => {
+      if(res.ok){
+        res.json().then(updateProduction)
+      } else {
+        //Display errors
+        res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
+      }
+    })
+  }
+    return (
+      <div className='App'>
+      {errors?errors.map(e => <div>{e}</div>):null}
+      <Form onSubmit={onSubmit}>
+        <label>Title </label>
+        <input type='text' name='title' value={formData.title} onChange={handleChange} />
+        
+        <label> Genre</label>
+        <input type='text' name='genre' value={formData.genre} onChange={handleChange} />
+      
+        <label>Budget</label>
+        <input type='number' name='budget' value={formData.budget} onChange={handleChange} />
+      
+        <label>Image</label>
+        <input type='text' name='image' value={formData.image} onChange={handleChange} />
+      
+        <label>Director</label>
+        <input type='text' name='director' value={formData.director} onChange={handleChange} />
+      
+        <label>Description</label>
+        <textarea type='text' rows='4' cols='50' name='description' value={formData.description} onChange={handleChange} />
+      
+        <input type='submit' value='Update Production' />
+      </Form>
+      {errors?errors.map(e => <h2 style={{color:'red'}}>{e.toUpperCase()}</h2>):null}
+      </div>
+    )
+  }
+  
+  export default EditProductionForm

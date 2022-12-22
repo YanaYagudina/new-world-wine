@@ -93,6 +93,10 @@ useEffect(() => {
           <Home wines={wines} />
         </Route>
 
+        {/* <Route exact path='/wines/delete'>
+          <WineForm addWine={addWine} />
+        </Route> */}
+
         <Route exact path='/wines/new'>
           <WineForm addWine={addWine} />
         </Route>
@@ -108,6 +112,7 @@ useEffect(() => {
         <Route exact path='/aboutus'>
           <AboutUs />
         </Route>
+
         <Route exact path='/navigation'>
           <Navigation />
         </Route>
