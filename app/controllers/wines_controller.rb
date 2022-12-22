@@ -1,5 +1,6 @@
 class WinesController < ApplicationController
     skip_before_action :authorized_user
+    wrap_parameters format: []
     # , only: [:index, :show]
 
    # before_action :admin_only, only: [:create, :update, :destroy]
@@ -19,13 +20,15 @@ class WinesController < ApplicationController
     end
 
     def update
+        wine = Wine.find(params[:id])
         wine.update!(wine_params)
         render json: wine, status: :accepted
     end
 
     def destroy
+        wine = Wine.find(params[:id])
         wine.destroy
-        render json: {}
+        head :no_content
     end
 
     private
