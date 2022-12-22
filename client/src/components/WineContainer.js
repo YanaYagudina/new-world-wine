@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import WineCard from './WineCard'
+import WineAddForm from "./WineAddForm"
+import React, {useState} from "react"
 
 
 function WineContainer({wines}) {
@@ -13,11 +15,21 @@ function WineContainer({wines}) {
             />
         )
     })
+    // => add wine button
+    const [addWine, setAddWine] = useState(false)
+    function handleClickAdd() {
+      setAddWine((addWine) => !addWine);
+      console.log(addWine)
+    }
 
     return (
         <div>
             <Title><span>W</span>orld <span>W</span>ine</Title>
+            <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
+          {addWine ? <div>{<WineAddForm addWine={addWine}/>} </div> : null}
+          <br />
             {wineCards}
+        
         </div>
     )
   }
