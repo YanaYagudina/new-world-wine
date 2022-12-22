@@ -35,7 +35,7 @@ function App() {
   // GET '/wines'
 useEffect(() => {
   fetchWines()
-}, [currentUser])
+}, [])
 
   const fetchWines = () => {
     fetch('/wines')
@@ -79,6 +79,10 @@ useEffect(() => {
 
       <Route exact path='/winecard'>
       <WineCard/>
+      </Route>
+
+      <Route exact path='/winedetail'>
+      <WineDetail wines={wines}/>
       </Route>
 
       <Route exact path='/winecontainer'>

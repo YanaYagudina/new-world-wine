@@ -4,15 +4,15 @@ import { useEffect, useState } from "react"
 
 
 function Home({ wines }) {
-  const [recentWine, setRecentWine] = useState([]);
+  // const [recentWine, setRecentWine] = useState([]);
 
-  useEffect(() => {
-    fetch("/wines")
-      .then((r) => r.json())
-      .then((recentWine) => {
-        setRecentWine(recentWine);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/wines")
+  //     .then((r) => r.json())
+  //     .then((recentWine) => {
+  //       setRecentWine(recentWine);
+  //     });
+  // }, []);
   return (
     <div>
       <Image />
