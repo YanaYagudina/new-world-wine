@@ -6,20 +6,36 @@ import DeleteForm from "./DeleteForm"
 import WineAddForm from "./WineAddForm"
 
 
-function WineCard({ wine, updateWine, deleteWine, addWine }) {
+function WineCard({ wine, updateWine }) {
   
+  // updateWine, editWine, deleteWine, addWine 
   const { name, varietal, year, country, region, appelation, price, image } = wine
 //   console.log(wine)
-const [showDetails, setShowDetails] = useState(false)
-    
+
+// => show deteils button
+  const [showDetails, setShowDetails] = useState(false)
     function handleClick() {
         setShowDetails((showDetails) => !showDetails);
         console.log(showDetails)
+    }
+// => edit wine form button
+  const [editWine, setEditWine] = useState(false)
+    function handleClickEdit() {
+        setEditWine((editWine) => !editWine);
+        console.log(editWine)
       }
-  
-    
+// => delete wine button
+  const [deleteWine, setDeleteWine] = useState(false)
+    function handleClickDelete() {
+      setDeleteWine((deleteWine) => !deleteWine);
+      console.log(deleteWine)
+    }
 
-      
+    const [addWine, setAddWine] = useState(false)
+    function handleClickAdd() {
+      setAddWine((addWine) => !addWine);
+      console.log(addWine)
+    }
   return (
     // <Card>
       <div>
@@ -35,12 +51,21 @@ const [showDetails, setShowDetails] = useState(false)
         <button id="button1" className="emoji-button delete" onClick={handleClick}>Show Details</button>
           {showDetails ? <div>{<WineDetail wine={wine}/>} </div> : null}
           <br />
-          <EditWineForm updateWine={updateWine}/>
-          <DeleteForm deleteWine={deleteWine}/>
-          <WineAddForm addWine={addWine}/>
+        <button id="button1" className="emoji-button delete" onClick={handleClickEdit}>Edit Wine</button>
+          {updateWine ? <div>{<EditWineForm updateWine={updateWine}/>} </div> : null}
+          <br />
+          {/* <EditWineForm updateWine={updateWine}/> */}
+          <button id="button1" className="emoji-button delete" onClick={handleClickDelete}>Delete Wine</button>
+          {deleteWine ? <div>{<DeleteForm deleteWine={deleteWine}/>} </div> : null}
+          <br />
+          {/* <DeleteForm deleteWine={deleteWine}/> */}
+          <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
+          {addWine ? <div>{<WineAddForm addWine={addWine}/>} </div> : null}
+          <br />
+          {/* <WineAddForm addWine={addWine}/> */}
+          
           {/* <Link to={`/art/${id}`}>See more</Link> */}
-          {/* <button onClick={handleDelete}>Delete Wine</button>
-        <button onClick={handleBuy} >your order - ticket</button> */}
+        {/* <button onClick={handleBuy} >your order - ticket</button> */}
       </div>
     //   comment - delete
     // </Card>
