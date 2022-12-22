@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import {Form} from '../styled/Form'
+import { Form } from '../styled/Form'
 
 
 function EditWineForm({ updateWine }) {
@@ -22,12 +22,12 @@ function EditWineForm({ updateWine }) {
     image: ''
   })
   const [errors, setErrors] = useState([])
-  const {id} = useParams()
+  const { id } = useParams()
   useEffect(() => {
     fetch(`/wines/${id}`)
-    .then(res => res.json())
-    .then(setFormData)
-  },[])
+      .then(res => res.json())
+      .then(setFormData)
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -38,74 +38,184 @@ function EditWineForm({ updateWine }) {
   function onSubmit(e) {
     e.preventDefault()
     //PATCH to `/wines/${id}`
-    fetch(`/wines/${id}`,{
-      method:'PATCH',
-      headers: {'Content-Type': 'application/json'},
-      body:JSON.stringify(formData)
+    fetch(`/wines/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     })
-    .then(res => {
-      if(res.ok){
-        res.json().then(updateWine)
-      } else {
-        //Display errors
-        res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
-      }
-    })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(updateWine)
+        } else {
+          //Display errors
+          res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
+        }
+      })
   }
   return (
     <div className='App'>
-      {errors?errors.map(e => <div>{e}</div>):null}
-      <form onSubmit={onSubmit}>
-        <label>Name </label>
-        <input type='text' name='name' value={formData.name} onChange={handleChange} />
+      {errors ? errors.map(e => <div>{e}</div>) : null}
+      <Form onSubmit={onSubmit}>
+        {/* <h3> Edit Wine</h3> */}
 
-        <label>Brand</label>
-        <input type='text' name='brand' value={formData.brand} onChange={handleChange} />
+        <lable>Name</lable>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
 
-        <label>Year</label>
-        <input type='number' name='year' value={formData.year} onChange={handleChange} />
+        <label htmlFor="year">Year</label>
+        <select
+          name="year"
+          id="year"
+          onChange={handleChange}
+        >
+          <option value="">Pick a Year</option>
+          <option value="1">2015</option>
+          <option value="2">2016</option>
+          <option value="3">2017</option>
+          <option value="4">2018</option>
+          <option value="5">2019</option>
+          <option value="6">2020</option>
+          <option value="7">2021</option>
+          <option value="8">2022</option>
+        </select>
 
-        <label>Price</label>
-        <input type='number' name='price' value={formData.price} onChange={handleChange} />
+        <label htmlFor="price">Price</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          onChange={handleChange}
+        />
 
-        <label> Description </label>
-        <input type='text' rows='4' cols='50' name='product_information' value={formData.product_information} onChange={handleChange} />
+        <label htmlFor="brand">Brand</label>
+        <input
+          type="text"
+          id="brand"
+          name="brand"
+          onChange={handleChange}
+        />
 
-        <label>Country</label>
-        <textarea type='text' name='country' value={formData.country} onChange={handleChange} />
+        <label htmlFor="country">Country</label>
+        <select
+          name="country"
+          id="country"
+          onChange={handleChange}
+        >
+          <option value="">Pick a Country</option>
+          <option value="1">France</option>
+          <option value="2">Spain</option>
+          <option value="3">Italy</option>
+          <option value="4">USA</option>
+        </select>
 
-        <label>Region</label>
-        <textarea type='text' name='region' value={formData.region} onChange={handleChange} />
 
-        <label>Appelation</label>
-        <textarea type='text' name='appelation' value={formData.appelation} onChange={handleChange} />
+        <label htmlFor="region">Region</label>
+        <input
+          type="text"
+          id="region"
+          name="region"
+          onChange={handleChange}
+        />
 
-        <label>Wine Type</label>
-        <textarea type='text' name='wine_type' value={formData.wine_type} onChange={handleChange} />
+        <label htmlFor="type">Type</label>
+        <select
+          name="type"
+          id="type"
+          onChange={handleChange}
+        >
+          <option value="">Type of Wine</option>
+          <option value="1">Red</option>
+          <option value="2">White</option>
+          <option value="3">Rose</option>
+        </select>
 
-        <label>Varietal</label>
-        <textarea type='text' name='varietal' value={formData.varietal} onChange={handleChange} />
+        <label htmlFor="variental">Variental</label>
+        <select
+          name="variental"
+          id="variental"
+          onChange={handleChange}
+        >
+          <option value="">Pick a variental</option>
+          <option value="1">Cabernet Sauvignon</option>
+          <option value="2">Syrah</option>
+          <option value="3">Grenache</option>
+          <option value="4">Sauvignon Blanc</option>
+          <option value="5">Pinot Noir</option>
+          <option value="6">Chardonnay</option>
+        </select>
 
-        <label>Style</label>
-        <textarea type='text' name='style' value={formData.style} onChange={handleChange} />
 
-        <label>Taste</label>
-        <textarea type='text' name='taste' value={formData.taste} onChange={handleChange} />
+        <label htmlFor="taste">Taste</label>
+        <input
+          type="text"
+          id="taste"
+          name="taste"
+          onChange={handleChange}
+        />
 
-        <label>Body</label>
-        <textarea type='text' name='body' value={formData.body} onChange={handleChange} />
+        <label htmlFor="body">Body</label>
+        <select
+          name="body"
+          id="variebodyntal"
+          onChange={handleChange}
+        >
+          <option value="">Pick a body</option>
+          <option value="1">Light-bodied</option>
+          <option value="2">Medium-bodied</option>
+          <option value="3">Full-bodied</option>
+        </select>
 
-        <label>ABV</label>
-        <input type='number' name='abv' value={formData.abv} onChange={handleChange} />
+        <label htmlFor="abv">ABV</label>
+        <input
+          type="number"
+          id="abv"
+          name="abv"
+          onChange={handleChange}
+        />
 
-        <label>Image</label>
-        <input type='text' name='image' value={formData.image} onChange={handleChange} />
+        <label htmlFor="information">Information</label>
+        <textarea
+          id="information"
+          name="information"
+          onChange={handleChange}
+        />
+{/* 
+        <label htmlFor="food">Food</label>
+        <input
+          type="text"
+          id="food"
+          name="food"
+          onChange={handleChange}
+        /> */}
 
-        <input type='submit' value='Update Wine' />
-      </form>
-      {errors?errors.map(e => <h2 style={{color:'red'}}>{e.toUpperCase()}</h2>):null}
+        {/* <label htmlFor="link">Project Homepage</label>
+        <input type="text" id="link" name="link" /> */}
+        {/* <label htmlFor="link">Wine Homepage</label>
+            <input
+                type="text"
+                id="link"
+                name="link"
+                value={link}
+                onChange={handleChange}
+            /> */}
+
+        <label htmlFor="image">Image</label>
+        <input
+          type="text"
+          id="image"
+          name="image"
+          onChange={handleChange}
+        />
+
+        <button type="submit">Update Wine</button>
+      </Form>
     </div>
-  )
-}
+  );
+};
 
-export default EditWineForm
+export default EditWineForm;
