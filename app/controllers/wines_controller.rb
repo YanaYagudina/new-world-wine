@@ -10,6 +10,7 @@ class WinesController < ApplicationController
     end
 
     def show
+        # binding.break
         wine = Wine.find(params[:id])
         render json: wine, status: :ok    
     end
@@ -20,6 +21,7 @@ class WinesController < ApplicationController
     end
 
     def update
+     
         wine = Wine.find(params[:id])
         wine.update!(wine_params)
         render json: wine, status: :accepted

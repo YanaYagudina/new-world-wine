@@ -5,6 +5,7 @@ import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/ap
 import './MapPage.css';
 import React, { useEffect, useState } from 'react';
 import pnglogo from '../imgGeo/geolocation.png'
+// import pnglogo from "./src/imgGeo/geolocation.png"
 
 
 export default function MapPage() {

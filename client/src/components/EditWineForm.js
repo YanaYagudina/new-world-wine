@@ -33,8 +33,8 @@ function EditWineForm({ updateWine }) {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
-
-
+console.log(id)
+console.log(formData)
   function onSubmit(e) {
     e.preventDefault()
     //PATCH to `/wines/${id}`
@@ -54,7 +54,7 @@ function EditWineForm({ updateWine }) {
   }
   return (
     <div className='App'>
-      {errors ? errors.map(e => <div>{e}</div>) : null}
+      {/* {errors ? errors.map(e => <div>{e}</div>) : null} */}
       <Form onSubmit={onSubmit}>
         {/* <h3> Edit Wine</h3> */}
 

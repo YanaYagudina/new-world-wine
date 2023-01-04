@@ -12,15 +12,15 @@ function WineCard({ wine }) {
   const { name, varietal, year, country, region, appelation, price, image } = wine
 //   console.log(wine)
 
-// => show deteils button
+// => show details button
   const [showDetails, setShowDetails] = useState(false)
     function handleClick() {
         setShowDetails((showDetails) => !showDetails);
         console.log(showDetails)
     }
-// => edit wine form button
+// => update wine form button
   const [updateWine, setupdateWine] = useState(false)
-    function handleClickEdit() {
+    function handleClickUpdate() {
         setupdateWine((updateWine) => !updateWine);
         console.log(updateWine)
       }
@@ -37,8 +37,7 @@ function WineCard({ wine }) {
 //       console.log(addWine)
 //     }
   return (
-    // <Card>
-      <div>
+    <li className="card">
         <img src={image} />
         <p>{name}</p>
         <p>{varietal}</p>
@@ -51,7 +50,7 @@ function WineCard({ wine }) {
         <button id="button1" className="emoji-button delete" onClick={handleClick}>Show Details</button>
           {showDetails ? <div>{<WineDetail wine={wine}/>} </div> : null}
           <br />
-        <button id="button1" className="emoji-button delete" onClick={handleClickEdit}>Edit Wine</button>
+        <button id="button1" className="emoji-button delete" onClick={handleClickUpdate}>Update Wine</button>
           {updateWine ? <div>{<EditWineForm updateWine={updateWine}/>} </div> : null}
           <br />
           {/* <EditWineForm updateWine={updateWine}/> */}
@@ -66,38 +65,9 @@ function WineCard({ wine }) {
           
           {/* <Link to={`/art/${id}`}>See more</Link> */}
         {/* <button onClick={handleBuy} >your order - ticket</button> */}
-      </div>
-    //   comment - delete
-    // </Card>
+  </li>
 
   )
 }
 
 export default WineCard
-
-
-// const Card = styled.li`
-//     display:flex;
-//     flex-direction:row;
-//     justify-content:start;
-//     font-family:Arial, sans-serif;
-//     margin:10px;
-//     &:hover {
-//       transform: scale(1.15);
-//       transform-origin: top left;
-//     }
-//     a{
-//       text-decoration:none;
-//       color:white;
-//     }
-//     img{
-//       width: 180px;
-//       margin-left:20%;
-//       mask-image: linear-gradient(to left, rgba(0, 0, 0, .9) 80%, transparent 100%);
-//     }
-//     position:relative;
-//     div{
-//     position:absolute;
-    
-//     }
-//   `
