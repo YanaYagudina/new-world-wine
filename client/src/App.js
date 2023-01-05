@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import Home from './components/Home'
 import WineForm from './components/WineForm'
 import Navigation from './components/Navigation'
@@ -9,25 +10,12 @@ import UserPage from './components/UserPage'
 import Login from './components/Login'
 import AboutUs from './components/AboutUs'
 import AdminPage from './components/AdminPage'
-import WineContainer from './components/WineContainer'
 
 
 function App() {
   const [wines, setWines] = useState([])
   const [errors, setErrors] = useState(false)
   const [currentUser, setCurrentUser] = useState(false)
-  //Comment
-  useEffect(() => {
-    fetch('/authorized_user')
-      .then(res => {
-        if (res.ok) {
-          res.json()
-            .then(user => {
-              setCurrentUser(user)
-            })
-        }
-      })
-  }, [])
 
   // GET '/wines'
 useEffect(() => {
@@ -56,13 +44,10 @@ useEffect(() => {
   return (
     <>
       <GlobalStyle />
+      <Image />
       <Navigation updateUser={updateUser} />
       {/* {!currentUser ? <Login error={'please login'} updateUser={updateUser} /> : */}
       <Switch>
-
-      <Route exact path='/winecontainer'>
-          <WineContainer wines={wines}/>
-        </Route>
 
         <Route exact path='/'>
           <Home wines={wines} />
@@ -98,7 +83,6 @@ useEffect(() => {
         </Route>
 
       </Switch>
-      {/* } */}
     </>
   )
 }
@@ -110,3 +94,11 @@ const GlobalStyle = createGlobalStyle`
       color:white;
     }
     `
+
+
+const Image = styled.img.attrs(() => ({
+  src: '../img/backgraund.png',
+}))`
+    position: absolute;
+    z-index:-1;
+  `

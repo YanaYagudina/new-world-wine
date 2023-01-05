@@ -1,40 +1,66 @@
 import styled from 'styled-components'
 import WineCard from './WineCard'
 import WineAddForm from "./WineAddForm"
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 
-function WineContainer({wines}) {
-    console.log(wines)
 
-    const wineCards = wines.map(wine => {
+function WineContainer({ wines }) {
+    // console.log(wines)
+
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const searchResults = wines.filter((wine) => {
+        return wine.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    const wineCards = searchResults.map(wine => {
         return (
-            <WineCard
-                key={wine.id}
-                wine={wine}
-            />
+                <WineCard
+                    key={wine.id}
+                    wine={wine}
+                />
         )
     })
+
+    const handleOnChange = (e) => setSearchQuery(e.target.value)
+
+
+
     // => add wine button
     const [addWine, setAddWine] = useState(false)
     function handleClickAdd() {
-      setAddWine((addWine) => !addWine);
-      console.log(addWine)
+        setAddWine((addWine) => !addWine);
+        //   console.log(addWine)
     }
-    
+
 
     return (
         <div>
             <Title><span>W</span>orld <span>W</span>ine</Title>
+            <ul>
             <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
-          {addWine ? <div>{<WineAddForm addWine={addWine}/>} </div> : null}
-          <br />
-            {wineCards}
-        
+            {addWine ? <div>{<WineAddForm addWine={addWine} />} </div> : null}
+            </ul>
+            <br />
+            <section>
+                <ul className="filter">
+                    <button>All</button>
+                    <button>France</button>
+                    <button>Spain</button>
+                    <button>Italy</button>
+                    <button>USA</button>
+                </ul>
+                <ul>
+                <input type="text" placeholder="Search by name..." onChange={handleOnChange} />
+                </ul>
+            </section>
+            <ul className="cards">{wineCards}</ul>
+
         </div>
     )
-  }
-  
+}
+
 export default WineContainer
 
 const Title = styled.h1`

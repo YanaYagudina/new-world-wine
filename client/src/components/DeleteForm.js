@@ -12,7 +12,7 @@ function DeleteForm({deleteWine}) {
     const history = useHistory()
     useEffect(()=>{
       //GET to '/wines/:id'
-      fetch(`/wines/${id}`)
+      fetch(`/wines/` + deleteWine.id)
       .then(res => { 
         if(res.ok){
           res.json().then(data => {
@@ -28,14 +28,15 @@ function DeleteForm({deleteWine}) {
   
     function handleDelete(){
       //DELETE to `/wines/${params.id}`
-      fetch(`/wines/${id}`,{
+      fetch(`/wines/` + deleteWine.id, {
         method:'DELETE',
         headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
         if(res.ok){
-          deleteWine(id)
+          // deleteWine(deleteWine.id)
           history.push('/')
+          window.location.reload()
         } else {
           res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
         }

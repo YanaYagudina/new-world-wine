@@ -5,29 +5,29 @@ import { Form } from '../styled/Form'
 
 function EditWineForm({ updateWine }) {
   const [formData, setFormData] = useState({
-    name: '',
-    year: '',
-    price: '',
-    product_information: '',
-    brand: '',
-    country: '',
-    region: '',
-    appelation: '',
-    wine_type: '',
-    varietal: '',
-    style: '',
-    abv: '',
-    taste: '',
-    body: '',
-    image: ''
+    name: updateWine.name,
+    year: updateWine.year,
+    price: updateWine.price,
+    product_information: updateWine.product_information,
+    brand: updateWine.brand,
+    country: updateWine.country,
+    region: updateWine.region,
+    appelation: updateWine.appelation,
+    wine_type: updateWine.wine_type,
+    varietal: updateWine.varietal,
+    style: updateWine.style,
+    abv: updateWine.abv,
+    taste: updateWine.taste,
+    body: updateWine.body
+    // image: ''
   })
   const [errors, setErrors] = useState([])
   const { id } = useParams()
-  useEffect(() => {
-    fetch(`/wines/${id}`)
-      .then(res => res.json())
-      .then(setFormData)
-  }, [])
+  // useEffect(() => {
+  //   fetch(`/wines/${id}`)
+  //     .then(res => res.json())
+  //     .then(setFormData)
+  // }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -38,7 +38,8 @@ console.log(formData)
   function onSubmit(e) {
     e.preventDefault()
     //PATCH to `/wines/${id}`
-    fetch(`/wines/${id}`, {
+    console.log(updateWine)
+    fetch(`/wines/` + updateWine.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -46,6 +47,7 @@ console.log(formData)
       .then(res => {
         if (res.ok) {
           res.json().then(updateWine)
+          window.location.reload()
         } else {
           //Display errors
           res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
@@ -89,6 +91,7 @@ console.log(formData)
           type="number"
           id="price"
           name="price"
+          value={formData.price}
           onChange={handleChange}
         />
 
@@ -97,6 +100,7 @@ console.log(formData)
           type="text"
           id="brand"
           name="brand"
+          value={formData.brand}
           onChange={handleChange}
         />
 

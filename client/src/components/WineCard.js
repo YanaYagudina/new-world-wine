@@ -16,26 +16,21 @@ function WineCard({ wine }) {
   const [showDetails, setShowDetails] = useState(false)
     function handleClick() {
         setShowDetails((showDetails) => !showDetails);
-        console.log(showDetails)
+        // console.log(showDetails)
     }
 // => update wine form button
   const [updateWine, setupdateWine] = useState(false)
     function handleClickUpdate() {
         setupdateWine((updateWine) => !updateWine);
-        console.log(updateWine)
+        // console.log(updateWine)
       }
 // => delete wine button
   const [deleteWine, setDeleteWine] = useState(false)
     function handleClickDelete() {
       setDeleteWine((deleteWine) => !deleteWine);
-      console.log(deleteWine)
+      // console.log(deleteWine)
     }
-// // => add wine button
-//     const [addWine, setAddWine] = useState(false)
-//     function handleClickAdd() {
-//       setAddWine((addWine) => !addWine);
-//       console.log(addWine)
-//     }
+
   return (
     <li className="card">
         <img src={image} />
@@ -51,11 +46,11 @@ function WineCard({ wine }) {
           {showDetails ? <div>{<WineDetail wine={wine}/>} </div> : null}
           <br />
         <button id="button1" className="emoji-button delete" onClick={handleClickUpdate}>Update Wine</button>
-          {updateWine ? <div>{<EditWineForm updateWine={updateWine}/>} </div> : null}
+          {updateWine ? <div>{<EditWineForm updateWine={wine}/>} </div> : null}
           <br />
           {/* <EditWineForm updateWine={updateWine}/> */}
         <button id="button1" className="emoji-button delete" onClick={handleClickDelete}>Delete Wine</button>
-          {deleteWine ? <div>{<DeleteForm deleteWine={deleteWine}/>} </div> : null}
+          {deleteWine ? <div>{<DeleteForm deleteWine={wine}/>} </div> : null}
           <br />
           {/* <DeleteForm deleteWine={deleteWine}/> */}
         {/* <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
