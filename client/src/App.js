@@ -8,6 +8,7 @@ import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import UserPage from './components/UserPage'
 import Login from './components/Login'
+import Signup from './components/Signup'
 import AboutUs from './components/AboutUs'
 import AdminPage from './components/AdminPage'
 
@@ -33,7 +34,7 @@ useEffect(() => {
       })
   }
 
-
+console.log (currentUser)
 
   const addWine = (wine) => setWines(current => [...current, wine])
 
@@ -76,6 +77,9 @@ useEffect(() => {
 
         <Route path='/login'>
           <Login updateUser={updateUser} />
+        </Route>
+        <Route path='/signup'>
+          <Signup updateUser={updateUser} />
         </Route>
 
         <Route>

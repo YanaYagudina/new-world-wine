@@ -60,7 +60,7 @@ function Login({updateUser}) {
         <input type='password' name='password' value={password} onChange={handleChange} />
 
         <input type='submit' value='Log in!'/>
-        <input type='submit' onClick={() => setSignup(true)} value='Sign up!'/>
+        {/* <input type='submit' onClick={() => setSignup(true)} value='Sign up!'/> */}
       </Form>
       {errors? <div>{errors}</div>:null}
         </>

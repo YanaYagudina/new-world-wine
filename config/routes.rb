@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 post "/login", to: "sessions#create"
 post "/signup", to: "users#create"
-delete '/logout', to: 'sessions#delete'
+delete '/logout', to: 'sessions#destroy'
 # get '/hello', to: 'application#hello_world'
 get '/authorized_user', to:"users#show"
 end
