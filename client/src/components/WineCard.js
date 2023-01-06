@@ -1,8 +1,8 @@
 import React, {useState} from "react"
-import styled from 'styled-components'
 import WineDetail from './WineDetail'
 import EditWineForm from "./EditWineForm"
 import DeleteForm from "./DeleteForm"
+import styled from 'styled-components'
 // import WineAddForm from "./WineAddForm"
 
 
@@ -34,13 +34,11 @@ function WineCard({ wine, handleOrder }) {
   return (
     <li className="card">
         <img src={image} />
-        <p>{name}</p>
+        <h2>{name}</h2>
         <p>{varietal}</p>
         <p>{year}</p>
-        <p>{country}</p>
-        <p>{region}</p>
-        <p>{appelation}</p>
-        <p>$ {price}</p>
+        <p>{country}, {region}, {appelation} </p>
+        <h3>$ {price}</h3>
         
         <button id="button1" className="emoji-button delete" onClick={handleClick}>Show Details</button>
           {showDetails ? <div>{<WineDetail wine={wine}/>} </div> : null}

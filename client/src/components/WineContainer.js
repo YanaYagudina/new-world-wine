@@ -1,13 +1,12 @@
-import styled from 'styled-components'
 import WineCard from './WineCard'
 import WineAddForm from "./WineAddForm"
 import React, { useState } from "react"
 
 
 
+
 function WineContainer({ wines, handleOrder }) {
     // console.log(wines)
-
     const [searchQuery, setSearchQuery] = useState("");
 
     const searchResults = wines.filter((wine) => {
@@ -16,10 +15,10 @@ function WineContainer({ wines, handleOrder }) {
 
     const wineCards = searchResults.map(wine => {
         return (
-                <WineCard handleOrder={handleOrder}
-                    key={wine.id}
-                    wine={wine}
-                />
+            <WineCard handleOrder={handleOrder}
+                key={wine.id}
+                wine={wine}
+            />
         )
     })
 
@@ -33,14 +32,15 @@ function WineContainer({ wines, handleOrder }) {
         setAddWine((addWine) => !addWine);
         //   console.log(addWine)
     }
-
+    const img = document.createElement("img");
+    img.src = "../imgGeo/vino_mira1.png";
+    document.body.appendChild(img);
 
     return (
         <div>
-            <Title><span>W</span>orld <span>W</span>ine</Title>
             <ul>
-            <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
-            {addWine ? <div>{<WineAddForm addWine={addWine} />} </div> : null}
+                <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
+                {addWine ? <div>{<WineAddForm addWine={addWine} />} </div> : null}
             </ul>
             <br />
             <section>
@@ -52,7 +52,7 @@ function WineContainer({ wines, handleOrder }) {
                     <button>USA</button>
                 </ul>
                 <ul>
-                <input type="text" placeholder="Search by name..." onChange={handleOnChange} />
+                    <input type="text" placeholder="Search by name..." onChange={handleOnChange} />
                 </ul>
             </section>
             <ul className="cards">{wineCards}</ul>
@@ -62,23 +62,3 @@ function WineContainer({ wines, handleOrder }) {
 }
 
 export default WineContainer
-
-const Title = styled.h1`
-    text-transform: uppercase;
-    font-family:Arial, sans-serif;
-    width:70px;
-    font-size: 70px;
-    line-height: .8;
-   
-    transform: scale(.7, 1.4);
-    
-    span{
-        color:#42ddf5;
-    }
-`
-
-
-// const CardContainer = styled.ul`
-//     display:flex;
-//     flex-direction:column;
-// `

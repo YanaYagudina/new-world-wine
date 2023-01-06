@@ -1,13 +1,13 @@
 import React from 'react';
 
-function OrderRender({or, onItemClick}) {
+function OrderRender({ or, onItemClick }) {
 
-    function handleClick() {
-        onItemClick(or);
-      } 
+  function handleClick() {
+    onItemClick(or);
+  }
 
-    return(
-        <div >
+  return (
+    <div >
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{or.name}</h5>
