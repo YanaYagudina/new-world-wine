@@ -5,7 +5,7 @@ import React, { useState } from "react"
 
 
 
-function WineContainer({ wines }) {
+function WineContainer({ wines, handleOrder }) {
     // console.log(wines)
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -16,7 +16,7 @@ function WineContainer({ wines }) {
 
     const wineCards = searchResults.map(wine => {
         return (
-                <WineCard
+                <WineCard handleOrder={handleOrder}
                     key={wine.id}
                     wine={wine}
                 />

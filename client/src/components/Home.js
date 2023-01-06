@@ -1,9 +1,9 @@
 import WineContainer from './WineContainer'
 
-function Home({ wines }) {
+function Home({ wines, handleOrder }) {
   return (
     <div>
-      <WineContainer wines={wines} />
+      <WineContainer wines={wines} handleOrder={handleOrder} />
     </div>
   )
 }

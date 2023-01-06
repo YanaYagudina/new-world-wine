@@ -35,6 +35,7 @@ function Navigation({updateUser}) {
             <li><Link to='/login'>Login</Link></li>
             <li><Link to='/signup'>Sign up!</Link></li>
             <li><Link to='/aboutus'>About Us</Link></li>
+            <li><Link to='/order'>My order</Link></li>
             {/* <li><Link to='/wines/new'>New Wine</Link></li>  */}
             <li><Link to='/'> Home</Link></li>
         

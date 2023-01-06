@@ -6,7 +6,7 @@ import DeleteForm from "./DeleteForm"
 // import WineAddForm from "./WineAddForm"
 
 
-function WineCard({ wine }) {
+function WineCard({ wine, handleOrder }) {
   
   // updateWine, editWine, deleteWine, addWine 
   const { name, varietal, year, country, region, appelation, price, image } = wine
@@ -52,14 +52,7 @@ function WineCard({ wine }) {
         <button id="button1" className="emoji-button delete" onClick={handleClickDelete}>Delete Wine</button>
           {deleteWine ? <div>{<DeleteForm deleteWine={wine}/>} </div> : null}
           <br />
-          {/* <DeleteForm deleteWine={deleteWine}/> */}
-        {/* <button id="button1" className="emoji-button delete" onClick={handleClickAdd}>Add Wine</button>
-          {addWine ? <div>{<WineAddForm addWine={addWine}/>} </div> : null}
-          <br /> */}
-          {/* <WineAddForm addWine={addWine}/> */}
-          
-          {/* <Link to={`/art/${id}`}>See more</Link> */}
-        {/* <button onClick={handleBuy} >your order - ticket</button> */}
+          <button onClick={() => handleOrder(wine.id)}>ADD TO CART</button>
   </li>
 
   )

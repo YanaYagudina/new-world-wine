@@ -11,17 +11,19 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import AboutUs from './components/AboutUs'
 import AdminPage from './components/AdminPage'
+import Order from "./components/Order.js";
 
 
 function App() {
   const [wines, setWines] = useState([])
   const [errors, setErrors] = useState(false)
+  const [order, setOrder] = useState([]);
   const [currentUser, setCurrentUser] = useState(false)
 
   // GET '/wines'
-useEffect(() => {
-  fetchWines()
-}, [])
+  useEffect(() => {
+    fetchWines()
+  }, [])
 
   const fetchWines = () => {
     fetch('/wines')
@@ -34,7 +36,26 @@ useEffect(() => {
       })
   }
 
-console.log (currentUser)
+  console.log(currentUser)
+
+
+  function handleOrder(id) {
+    console.log(id)
+    const wineInOrder = wines.find(
+      (wine) => wine.id === id
+    );
+    console.log(wineInOrder)
+    if (wineInOrder) {
+      setOrder([...order, wineInOrder]);
+    }
+  }
+  function handleRemoveWineFromOrder(wineRemove) {
+    setOrder((order) =>
+      order.filter((wine) => wine.id !== wineRemove.id)
+    );
+  }
+
+  console.log(order);
 
   const addWine = (wine) => setWines(current => [...current, wine])
 
@@ -51,7 +72,7 @@ console.log (currentUser)
       <Switch>
 
         <Route exact path='/'>
-          <Home wines={wines} />
+          <Home wines={wines} handleOrder={handleOrder} />
         </Route>
 
         <Route exact path='/wines/new'>
@@ -74,10 +95,15 @@ console.log (currentUser)
           <UserPage updateUser={updateUser} />
         </Route>
 
+        <Route exect path="/order">
+          <Order onRemoveWine={handleRemoveWineFromOrder} order={order} />
+        </Route>
+
 
         <Route path='/login'>
           <Login updateUser={updateUser} />
         </Route>
+
         <Route path='/signup'>
           <Signup updateUser={updateUser} />
         </Route>
