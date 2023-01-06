@@ -18,7 +18,9 @@ function Navigation({updateUser}) {
         history.push('/')
       }
     })
+
   }
+
 
   return (
     <Nav>
@@ -80,3 +82,4 @@ const Menu = styled.div`
   }
   
 `;
+

@@ -8,7 +8,7 @@ margin:auto;
 font-family:Arial;
 font-size:30px;
 input[type=submit]{
-  background-color:#42ddf5;
+  background-color:#494949;
   color: white;
   height:40px;
   font-family:Arial;

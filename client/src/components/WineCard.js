@@ -2,8 +2,7 @@ import React, {useState} from "react"
 import WineDetail from './WineDetail'
 import EditWineForm from "./EditWineForm"
 import DeleteForm from "./DeleteForm"
-import styled from 'styled-components'
-// import WineAddForm from "./WineAddForm"
+
 
 
 function WineCard({ wine, handleOrder }) {

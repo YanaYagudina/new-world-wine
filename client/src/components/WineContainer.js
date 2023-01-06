@@ -2,8 +2,8 @@ import WineCard from './WineCard'
 import WineAddForm from "./WineAddForm"
 import React, { useState } from "react"
 
-
-
+// import logo1 from "../imgs/logo1.png"
+{/* <img src={logo1} alt="logo" height="100%" width="100px" /> */}
 
 function WineContainer({ wines, handleOrder }) {
     // console.log(wines)
@@ -32,9 +32,6 @@ function WineContainer({ wines, handleOrder }) {
         setAddWine((addWine) => !addWine);
         //   console.log(addWine)
     }
-    const img = document.createElement("img");
-    img.src = "../imgGeo/vino_mira1.png";
-    document.body.appendChild(img);
 
     return (
         <div>
