@@ -25,9 +25,9 @@ export default function MapPage() {
     }
 
     const mapStyles = {
-        height: '95vh',
-        width: '80%',
-        left: "150px",
+        height: '30vh',
+        width: '20%',
+        left: "10px",
     }
 
     const options = {
